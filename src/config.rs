@@ -1,7 +1,7 @@
 use crate::error::*;
 use crate::*;
-use crypto::digest::Digest;
-use crypto::sha2::Sha256;
+use digest::Digest;
+use sha2::Sha256;
 
 use std::fmt;
 use std::fs::File;
@@ -79,9 +79,7 @@ impl InputSalt {
             }
             InputSalt::String(s) => digest.input(s.as_bytes()),
         }
-        let mut salt = [0u8; 32];
-        digest.result(&mut salt);
-        Ok(salt)
+        Ok(digest.result().into())
     }
 }
 

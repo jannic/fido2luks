@@ -5,8 +5,8 @@ use crate::cli::*;
 use crate::config::*;
 use crate::device::*;
 use crate::error::*;
-use crypto::digest::Digest;
-use crypto::sha2::Sha256;
+use digest::Digest;
+use sha2::Sha256;
 use cryptsetup_rs as luks;
 use cryptsetup_rs::Luks1CryptDevice;
 
@@ -29,9 +29,7 @@ fn assemble_secret(hmac_result: &[u8], salt: &[u8]) -> [u8; 32] {
     let mut digest = Sha256::new();
     digest.input(salt);
     digest.input(hmac_result);
-    let mut secret = [0u8; 32];
-    digest.result(&mut secret);
-    secret
+    digest.result().into()
 }
 
 fn main() -> Fido2LuksResult<()> {

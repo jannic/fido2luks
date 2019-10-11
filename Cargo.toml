@@ -21,7 +21,8 @@ libcryptsetup-sys = "0.1.2"
 
 
 hex = "0.3.2"
-rust-crypto = "0.2.36"
+digest = "0.8.1"
+sha2 = "0.8.0"
 failure = "0.1.5"
 rpassword = "4.0.1"
 structopt = "0.3.2"
